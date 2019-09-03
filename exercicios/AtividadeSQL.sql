@@ -110,3 +110,82 @@ alter table `funcionarios` add constraint fk_Setor foreign key (`id_setor`) refe
 
 -- Adicionando a chave estrangeira na tabela de dependentes
 alter table `dependentes` add constraint fk_Funcionarioss foreign key (`id_funcionario`) references `funcionarios` (`id`);
+
+-- Fazendo as consultas no banco de dados
+-- 1) Inserir dados na tabela 
+-- tabela de estado
+insert into estados (nome, sigla) values ('goias', 'go')
+insert into estados (nome, sigla) values ('sao paulo', 'sp')
+insert into estados (nome, sigla) values ('rio de janeiro', 'rj')
+insert into estados (nome, sigla) values ('mato grosso', 'mt')
+
+-- tabela de cidades
+insert into cidades (nome, id_estado) VALUES ('goiania', 1);
+insert into cidades (nome, id_estado) VALUES ('sao paulo', 2);
+insert into cidades (nome, id_estado) VALUES ('rio de janeiro', 3);
+insert into cidades (nome, id_estado) VALUES ('cuiaba', 4);
+
+-- tabela de clientes 
+insert into clientes (nome, fone, cpf, id_cidade) values ('Mateus', '484', '54', 1);
+insert into clientes (nome, fone, cpf, id_cidade) values ('Gui', '484', '54', 2);
+insert into clientes (nome, fone, cpf, id_cidade) values ('jef', '484', '54', 3);
+insert into clientes (nome, fone, cpf, id_cidade) values ('aa', '484', '54', 4);
+
+-- tabela de vendas 
+insert into vendas (valor, data_venda, id_cliente, id_funcionario) values (54, '2001-05-10', 1, 1);
+insert into vendas (valor, data_venda, id_cliente, id_funcionario) values (64, '2001-05-10', 2, 2);
+insert into vendas (valor, data_venda, id_cliente, id_funcionario) values (214, '2001-05-10', 3, 3);
+insert into vendas (valor, data_venda, id_cliente, id_funcionario) values (554, '2001-05-10', 4, 4);
+
+-- tabela de funcionarios
+insert into funcionarios (cpf, nome, fone, endereco, id_setor) values ('4123', 'Mateus', '2134', 'ad', 1);
+insert into funcionarios (cpf, nome, fone, endereco, id_setor) values ('4123', 'Guilherme', '2134', 'ad', 2);
+insert into funcionarios (cpf, nome, fone, endereco, id_setor) values ('4123', 'jef', '2134', 'ad', 3);
+insert into funcionarios (cpf, nome, fone, endereco, id_setor) values ('4123', 'leo', '2134', 'ad', 4);
+
+-- tabela setor
+insert into setores (nome, sigla) values ('Contas', 'ct');
+insert into setores (nome, sigla) values ('vendas', 'vd');
+insert into setores (nome, sigla) values ('tecnologia', 'ti');
+insert into setores (nome, sigla) values ('suporte', 'spt');
+
+-- tabela funcionario 
+insert into fornecedores (nome, contato, email, id_cidade) values ('mateus', 'aa', 'ma@hotmail.com', 1);
+insert into fornecedores (nome, contato, email, id_cidade) values ('jed', 'aa', 'jed@hotmail.com', 2);
+insert into fornecedores (nome, contato, email, id_cidade) values ('robso', 'aa', 'ro@hotmail.com', 2);
+insert into fornecedores (nome, contato, email, id_cidade) values ('julia', 'aa', 'ju@hotmail.com', 3);
+insert into fornecedores (nome, contato, email, id_cidade) values ('gui', 'aa', 'gui@hotmail.com', 4);
+
+-- tabela compras
+insert into compras (valor, data_compra, id_fornecedor, id_funcionario) values (54, '2001-05-10', 1, 1);
+insert into compras (valor, data_compra, id_fornecedor, id_funcionario) values (64, '2001-05-10', 2, 2);
+insert into compras (valor, data_compra, id_fornecedor, id_funcionario) values (214, '2001-05-10', 2, 3);
+insert into compras (valor, data_compra, id_fornecedor, id_funcionario) values (554, '2001-05-10', 4, 4);
+
+-- tabela dependentes 
+insert into dependentes (nome, nascimento, tipo, id_funcionario) values ('mateus', '2001-05-10', 'humano', 1);
+insert into dependentes (nome, nascimento, tipo, id_funcionario) values ('gui', '2001-05-10', 'humano', 2);
+insert into dependentes (nome, nascimento, tipo, id_funcionario) values ('jef', '2001-05-10', 'humano', 3);
+insert into dependentes (nome, nascimento, tipo, id_funcionario) values ('daniel', '2001-05-10', 'humano', 4);
+
+-- 2) Criar uma consulta que mostre o seguinte resultado 
+-- | Estado | Sigla | Cidade
+
+select estados.nome, estados.sigla, cidades.nome from estados, cidades;  
+
+-- 3) Criar uma consulta que mostre o seguinte resultado
+-- | Nome Cliente | Valor da Venda
+
+select clientes.nome, vendas.valor from vendas inner join clientes on vendas.id_cliente = clientes.id;
+
+-- 4) Mostrar todas as compras do 2° fornecedor cadastrada
+
+select * from compras where compras.id_fornecedor = 2;
+
+-- 5) | Nome Fornecedor | Valor Compra |
+
+select fornecedores.nome, compras.valor from compras inner join fornecedores on compras.id_fornecedor = fornecedores.id;
+
+-- 6) | Nome Funcionario | Nome dependente | Tipo |
+
+select funcionarios.nome, dependentes.nome, dependentes.tipo from dependentes inner join funcionarios on dependentes.id_funcionario = funcionarios.id;
