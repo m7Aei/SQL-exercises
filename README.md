@@ -1,6 +1,6 @@
 # Exercícios de SQL :grin:
 
-### Esses são exercícios para ser praticado a linguagem SQL feitas no banco de dados MySQL, foi passado no dia 13/08/2019. Abaixo vou deixar listado todos os exercícios. :astonished:
+### Esses são exercícios para ser praticado a linguagem SQL feitas no banco de dados MySQL, foi passado no dia 13/08/2019 e 03/09/2019. Abaixo vou deixar listado todos os exercícios do dia 13/08/2019. :astonished:
 
 - [x] 1. Criar uma tabela que seja capaz de armazenar os dados de pessoas atendidas por um consultório odontológico
 
